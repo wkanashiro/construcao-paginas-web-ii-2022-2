@@ -15,18 +15,30 @@ try {
 try {
     // Montar SQL para inserção dos dados
     $query = 'INSERT INTO noticia (titulo, descricao) VALUES (:tit, :descr)';
+    // $query = 'INSERT INTO noticia (titulo, descricao) VALUES (?, ?)';
 
     // Preparar a SQL com PDO
     $stmt = $pdo->prepare($query);
 
     // Definir os dados para SQL
+    /*
     $dados = array(
         ':tit' => $_POST['titulo'],
         ':descr' => $_POST['descricao']
     );
+    */
+    
+    /*
+    $stmt->bindValue(1, $_POST['titulo']);
+    $stmt->bindValue(2, $_POST['descricao']);
+    */
+
+    $stmt->bindValue(':tit', $_POST['titulo']);
+    $stmt->bindValue(':descr', $_POST['descricao']);
 
     // (Tentar) Executar SQL de inserção dos dados com o PHP
-    $resultado = $stmt->execute($dados);
+    //$resultado = $stmt->execute($dados);
+    $resultado = $stmt->execute();
 
     if ($resultado == true) {
         header('Location: cadastrarNoticia.php?msg=Notícia cadastrada com sucesso!');
