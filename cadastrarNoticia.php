@@ -49,6 +49,10 @@ catch (PDOException $e) {
                 return false;
             }            
         }
+
+        function alterar(idNoticia) {
+            window.location.href = `alterarNoticia.php?id=${idNoticia}`;
+        }
     </script>
     <style>
         th {
@@ -81,14 +85,16 @@ catch (PDOException $e) {
                     <th>ID</th>
                     <th>Título</th>
                     <th>Descrição</th>
+                    <th>Operações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($noticias as $n) { ?>
                     <tr>
-                        <th><?php echo $n['id']; ?></th>
-                        <th><?php echo $n['titulo']; ?></th>
-                        <th><?php echo $n['descricao']; ?></th>
+                        <td><?php echo $n['id']; ?></td>
+                        <td><?php echo $n['titulo']; ?></td>
+                        <td><?php echo $n['descricao']; ?></td>
+                        <td><button onclick="alterar(<?php echo $n['id']; ?>);">Alterar</button></td>
                     </tr>
                 <?php } ?>
             </tbody>
